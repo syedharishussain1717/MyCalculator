@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 
 
@@ -13,41 +14,73 @@ st.set_page_config(
 
 
 # -----------------------------
-# Custom Styling
+# Custom CSS
 # -----------------------------
 
 st.markdown(
     """
     <style>
+
+    /* Main page */
     .main {
         padding-top: 2rem;
     }
 
-    .calculator-title {
+    /* Calculator title */
+    .title {
         text-align: center;
-        font-size: 40px;
+        font-size: 42px;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
-    .calculator-subtitle {
+    /* Subtitle */
+    .subtitle {
         text-align: center;
-        color: gray;
+        color: #777777;
+        font-size: 17px;
         margin-bottom: 30px;
     }
 
-    .result-box {
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        margin-top: 20px;
-        border: 1px solid #ddd;
+    /* Calculator container */
+    .calculator-box {
+        padding: 30px;
+        border-radius: 18px;
+        border: 1px solid #dddddd;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
     }
 
-    .result-text {
-        font-size: 32px;
-        font-weight: bold;
+    /* Result box */
+    .result-box {
+        padding: 25px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        text-align: center;
+        background-color: #f5f7fa;
+        border: 1px solid #dddddd;
     }
+
+    .result-label {
+        font-size: 16px;
+        color: #777777;
+    }
+
+    .result-value {
+        font-size: 38px;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        color: #888888;
+        font-size: 14px;
+        margin-top: 30px;
+    }
+
     </style>
     """,
     unsafe_allow_html=True
@@ -55,33 +88,43 @@ st.markdown(
 
 
 # -----------------------------
-# Title
+# Header
 # -----------------------------
 
 st.markdown(
-    '<div class="calculator-title">🧮 Simple Calculator</div>',
+    '<div class="title">🧮 Simple Calculator</div>',
     unsafe_allow_html=True
 )
 
 st.markdown(
-    '<div class="calculator-subtitle">'
-    'Perform basic mathematical calculations easily.'
+    '<div class="subtitle">'
+    'A simple and interactive calculator built with Python and Streamlit.'
     '</div>',
     unsafe_allow_html=True
 )
 
 
 # -----------------------------
-# User Input
+# Calculator Section
 # -----------------------------
 
-number1 = st.number_input(
-    "Enter the first number",
-    value=0.0
+st.markdown(
+    '<div class="calculator-box">',
+    unsafe_allow_html=True
 )
 
+st.subheader("Calculate")
+
+# First number
+number1 = st.number_input(
+    "First Number",
+    value=0.0,
+    step=1.0
+)
+
+# Operation
 operation = st.selectbox(
-    "Select an operation",
+    "Choose Operation",
     [
         "Addition (+)",
         "Subtraction (-)",
@@ -90,25 +133,35 @@ operation = st.selectbox(
     ]
 )
 
+# Second number
 number2 = st.number_input(
-    "Enter the second number",
-    value=0.0
+    "Second Number",
+    value=0.0,
+    step=1.0
 )
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 
 # -----------------------------
 # Buttons
 # -----------------------------
 
-calculate_button = st.button(
-    "🧮 Calculate",
-    use_container_width=True
-)
+st.write("")
 
-clear_button = st.button(
-    "🔄 Clear",
-    use_container_width=True
-)
+col1, col2 = st.columns(2)
+
+with col1:
+    calculate_button = st.button(
+        "🧮 Calculate",
+        use_container_width=True
+    )
+
+with col2:
+    clear_button = st.button(
+        "🔄 Clear",
+        use_container_width=True
+    )
 
 
 # -----------------------------
@@ -118,21 +171,27 @@ clear_button = st.button(
 if calculate_button:
 
     if operation == "Addition (+)":
+
         result = number1 + number2
 
     elif operation == "Subtraction (-)":
+
         result = number1 - number2
 
     elif operation == "Multiplication (×)":
+
         result = number1 * number2
 
     elif operation == "Division (÷)":
 
         if number2 == 0:
+
             st.error("❌ Cannot divide by zero.")
+
             result = None
 
         else:
+
             result = number1 / number2
 
     # Display result
@@ -141,8 +200,8 @@ if calculate_button:
         st.markdown(
             f"""
             <div class="result-box">
-                <div>Result</div>
-                <div class="result-text">{result:g}</div>
+                <div class="result-label">Result</div>
+                <div class="result-value">{result:g}</div>
             </div>
             """,
             unsafe_allow_html=True
@@ -154,4 +213,20 @@ if calculate_button:
 # -----------------------------
 
 if clear_button:
+
     st.rerun()
+
+
+# -----------------------------
+# Footer
+# -----------------------------
+
+st.markdown(
+    """
+    <div class="footer">
+        Built with Python 🐍 and Streamlit 🚀
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+```
