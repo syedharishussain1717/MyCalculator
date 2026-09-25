@@ -51,7 +51,7 @@ Contains information and documentation about the project.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/simple-streamlit-calculator.git
+git clone https://github.com/syedharishussain1717/MyCalculator.git
 ```
 
 Replace `YOUR_USERNAME` with your GitHub username.
